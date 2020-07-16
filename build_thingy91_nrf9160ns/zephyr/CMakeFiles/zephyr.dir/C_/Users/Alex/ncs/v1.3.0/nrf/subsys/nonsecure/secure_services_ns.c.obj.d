@@ -1,0 +1,21 @@
+zephyr/CMakeFiles/zephyr.dir/C_/Users/Alex/ncs/v1.3.0/nrf/subsys/nonsecure/secure_services_ns.c.obj: \
+ C:/Users/Alex/ncs/v1.3.0/nrf/subsys/nonsecure/secure_services_ns.c \
+ C:/Users/Alex/ncs/v1.3.0/nrf/samples/nrf9160/coap_client/build_thingy91_nrf9160ns/zephyr/include/generated/autoconf.h \
+ C:/Users/Alex/ncs/v1.3.0/zephyr/include/toolchain/zephyr_stdint.h \
+ zephyr/include/generated/autoconf.h \
+ C:/Users/Alex/ncs/v1.3.0/nrf/include/secure_services.h \
+ c:\users\alex\ncs\v1.3.0\toolchain\opt\lib\gcc\arm-none-eabi\9.2.1\include\stddef.h \
+ C:/Users/Alex/ncs/v1.3.0/zephyr/include/zephyr/types.h \
+ C:/Users/Alex/ncs/v1.3.0/zephyr/lib/libc/minimal/include/stdint.h \
+ C:/Users/Alex/ncs/v1.3.0/nrf/include/fw_info.h \
+ C:/Users/Alex/ncs/v1.3.0/zephyr/include/toolchain.h \
+ C:/Users/Alex/ncs/v1.3.0/zephyr/include/toolchain/gcc.h \
+ C:/Users/Alex/ncs/v1.3.0/zephyr/include/toolchain/common.h \
+ C:/Users/Alex/ncs/v1.3.0/zephyr/lib/libc/minimal/include/stdbool.h \
+ C:/Users/Alex/ncs/v1.3.0/zephyr/include/sys/util.h \
+ C:/Users/Alex/ncs/v1.3.0/zephyr/include/sys/__assert.h \
+ C:/Users/Alex/ncs/v1.3.0/zephyr/include/linker/sections.h \
+ C:/Users/Alex/ncs/v1.3.0/zephyr/include/linker/section_tags.h \
+ C:/Users/Alex/ncs/v1.3.0/zephyr/lib/libc/minimal/include/string.h \
+ C:/Users/Alex/ncs/v1.3.0/zephyr/lib/libc/minimal/include/bits/restrict.h \
+ zephyr/include/generated/pm_config.h
