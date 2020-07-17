@@ -35,6 +35,23 @@ void bsd_recoverable_error_handler(uint32_t err) {
 
 #endif /* defined(CONFIG_BSD_LIBRARY) */
 
+static struct sockaddr_in parse_ip_address(int port, char *ip_address) {
+  struct sockaddr_in addr;
+
+  memset(&addr, '0', sizeof(addr)); // init to zero
+
+  // convert to usable address
+  if (inet_pton(AF_INET, ip_address, &addr.sin_addr) <= 0) {
+    printf("\n IP parsing failed\n");
+    exit(EXIT_FAILURE);
+  }
+
+  addr.sin_family = AF_INET;
+  addr.sin_port = htons(port);
+
+  return addr;
+}
+
 /**@brief Resolves the configured hostname. */
 static int server_resolve(void) {
   int err;
@@ -77,13 +94,18 @@ static int server_resolve(void) {
 static int client_init(void) {
   int err;
 
-  sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+  sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP); //iproto_ip
   if (sock < 0) {
     printk("Failed to create CoAP socket: %d.\n", errno);
     return -errno;
   }
 
-  err = connect(sock, (struct sockaddr *)&server,
+  // setting up localhost
+  char *ip_address = "83.150.54.152";
+  struct sockaddr_in server_address = parse_ip_address(5683, ip_address);
+  printf("resolved ip... \n");
+
+  err = connect(sock, (struct sockaddr *)&server_address,
       sizeof(struct sockaddr_in));
   if (err < 0) {
     printk("Connect failed : %d\n", errno);
@@ -118,6 +140,8 @@ static int client_handle_get_response(u8_t *buf, int received) {
 
   payload = coap_packet_get_payload(&reply, &payload_len);
   token_len = coap_header_get_token(&reply, token);
+  printk("response: %s\n", &reply);
+  printk("====\n");
 
   if ((token_len != sizeof(next_token)) &&
       (memcmp(&next_token, token, sizeof(next_token)) != 0)) {
@@ -140,8 +164,6 @@ static int client_get_send(void) {
   struct coap_packet request;
 
   next_token++;
-
-  printf("lmao it works\n");
 
   err = coap_packet_init(&request, coap_buf, sizeof(coap_buf),
       APP_COAP_VERSION, COAP_TYPE_NON_CON,
@@ -270,10 +292,11 @@ void main(void) {
 
   modem_configure();
 
+  /*
   if (server_resolve() != 0) {
     printk("Failed to resolve server name\n");
     return;
-  }
+  } */
 
   if (client_init() != 0) {
     printk("Failed to initialize CoAP client\n");
